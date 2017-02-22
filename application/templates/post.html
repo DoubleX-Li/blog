@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="post">
+        <div class="post-header">
+            <div class="post-date">{{ moment(post.post_time).format('LLL') }}</div>
+            <div class="post-title">
+                {{ post.title }}
+            </div>
+        </div>
+        <div class="post-content">
+            {{ post.content | safe }}
+        </div>
+    </div>
+    {% if pagination %}
+        <div class="pagination">
+            {{ macros.pagination_widget(pagination, '.index') }}
+        </div>
+    {% endif %}
+{% endblock %}
