@@ -1,27 +1,61 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block imgUrl %}{{ url_for('static',filename='img/post-bg.jpg') }}{% endblock %}
+{% block myHead %}{{ post.title }}{% endblock %}
+{% block mySubheading %}{% endblock %}
 
 {% block page_content %}
-    <div class="post">
-        <div class="post-header">
-            <div class="post-date">{{ moment(post.post_time).format('LLL') }}</div>
-            <div class="post-title">
-                {{ post.title }}
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ post.content | safe }}
+                </div>
             </div>
         </div>
-        <div class="post-content">
-            {{ post.content | safe }}
+    </article>
+    <hr>
+    <div class="add-comment">
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        {% for message in get_flashed_messages() %}
+                            <div class="alert alert-warning">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>发表评论</p>
+                    {{ wtf.quick_form(form) }}
+                </div>
+            </div>
         </div>
+
+        <hr>
     </div>
-    <div class="comment">
-        {{ wtf.quick_form(form) }}
-    </div>
-    <div class="comments-tabs">
-        {% include '_comments.html' %}
+    <div class="comments" id="comments">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>评论内容如下：</p>
+                    {% include '_comments.html' %}
+                </div>
+            </div>
+        </div>
     </div>
     {% if pagination %}
         <div class="pagination">
-            {{ macros.pagination_widget(pagination, '.index') }}
+            {{ macros.pagination_widget(pagination, '.post',post_id=post.id ,_anchor='comments') }}
         </div>
     {% endif %}
 {% endblock %}

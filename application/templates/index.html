@@ -3,21 +3,20 @@
 {% import "_macros.html" as macros %}
 
 {% block title %}Li's blog{% endblock %}
+{% block imgUrl %}{{ url_for('static',filename='img/home-bg.jpg') }}{% endblock %}
+{% block myHead %}Li's blog{% endblock %}
+{% block mySubheading %}写字的地方{% endblock %}
 
 {% block page_content %}
-    <div class="page-header">
-        <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
-        {% if current_user.is_authenticated %}
-            <a href="{{ url_for('.add_post') }}">添加新文章</a>
+
+    <!-- Main Content -->
+    <div class="container">
+        {% include '_posts.html' %}
+        {% if pagination %}
+            <div class="pagination">
+                {{ macros.pagination_widget(pagination, '.index')}}
+            </div>
         {% endif %}
     </div>
-
-    <div class="post-tabs">
-        {% include '_posts.html' %}
-    </div>
-    {% if pagination %}
-        <div class="pagination">
-            {{ macros.pagination_widget(pagination, '.index') }}
-        </div>
-    {% endif %}
+    <hr>
 {% endblock %}

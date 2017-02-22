@@ -48,6 +48,7 @@ def add_post():
 
 @main.route('/post/<int:post_id>', methods=['GET', 'POST'])
 def post(post_id):
+    page = request.args.get('page', 1, type=int)
     form = CommentForm()
     if form.validate_on_submit():
         email = form.email.data
@@ -57,8 +58,11 @@ def post(post_id):
         db.session.add(comment)
         return redirect(url_for('.post', post_id=post_id))
     post = Post.query.get(post_id)
-    comments = Comment.query.filter_by(post_id=post_id)
-    return render_template('post.html', post=post, form=form, comments=comments, User=User)
+    pagination = Comment.query.filter_by(post_id=post_id).order_by(Comment.comment_time.desc()).paginate(
+        page, per_page=current_app.config['COMMENTS_PER_PAGE'],
+        error_out=False)
+    comments = pagination.items
+    return render_template('post.html', post=post, form=form, comments=comments, User=User, pagination=pagination)
 
 
 @main.route('/archives', methods=['GET'])
@@ -86,4 +90,9 @@ def archives():
             if len(result[year][month]) != 0:
                 category[year][month] = result[year][month]
     print(category)
-    return render_template('archives.html',category=category)
+    return render_template('archives.html', category=category)
+
+
+@main.route('/about')
+def about():
+    return User.query.get(1).about_me

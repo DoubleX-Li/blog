@@ -1,16 +1,13 @@
 <div class="comments">
-    <span>评论内容如下：</span>
     {% for comment in comments %}
         <div class="comment">
-            <div class="comment-date">{{ moment(comment.comment_time).fromNow() }}</div>
             <div class="comment-image">
-                <img src="{{ User.gravatar(email=comment.email,size=40) }}"/>
+                <img src="{{ User.gravatar(email=comment.email,size=50) }}"/>
             </div>
-            <div class="comment-email">
-                {{ comment.email }}
-            </div>
-            <div class="comment-content">
-                {{ comment.content }}
+            <div class="comment-text">
+                <span>{{ comment.email }} - </span>
+                <span>{{ moment(comment.comment_time).fromNow() }}</span><br>
+                <span>{{ comment.content }}</span>
             </div>
         </div>
     {% endfor %}

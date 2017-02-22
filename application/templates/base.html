@@ -4,29 +4,48 @@
 
 {% block head %}
     {{ super() }}
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='github.css') }}">
+    <!-- Theme CSS -->
+    <link href="{{ url_for('static',filename='css/clean-blog.css') }}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static',filename='font-awesome/css/font-awesome.css') }}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
 {% endblock %}
 
+
+
 {% block navbar %}
-    <div class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    目录 <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="{{ url_for('main.index') }}">Li's blog</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('main.index') }}">主页</a></li>
-                    <li><a href="{{ url_for('main.archives') }}">归档</a></li>
-                </ul>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ url_for('main.index') }}">主页</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('main.archives') }}">归档</a>
+                    </li>
+                    {#                    <li>#}
+                    {#                        <a href="post.html">Sample Post</a>#}
+                    {#                    </li>#}
+                    <li>
+                        <a href="{{ url_for('main.about') }}">关于我</a>
+                    </li>
                     {% if current_user.is_authenticated %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -44,25 +63,86 @@
                     {% endif %}
                 </ul>
             </div>
+            <!-- /.navbar-collapse -->
         </div>
     </div>
 {% endblock %}
-
 {% block content %}
-    <div class="container">
-        {% for message in get_flashed_messages() %}
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ message }}
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('{% block imgUrl %}{% endblock %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>{% block myHead %}{% endblock %}</h1>
+                        <hr class="small">
+                        <span class="subheading">{% block mySubheading %}{% endblock %}</span>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
+        </div>
+    </header>
+    <div class="content">
+        <div class="container">
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
 
-        {% block page_content %}{% endblock %}
+            {% block page_content %}{% endblock %}
+        </div>
     </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Li's blog 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}
+
+<hr>
 
 {% block scripts %}
     {{ super() }}
     {{ moment.include_moment() }}
     {{ moment.lang("zh-CN") }}
+    <!-- Contact Form JavaScript -->
+    <script src="{{ url_for('static',filename='js/jqBootstrapValidation.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/contact_me.js') }}"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="{{ url_for('static',filename='js/clean-blog.js') }}"></script>
 {% endblock %}
