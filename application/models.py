@@ -1,4 +1,5 @@
 import hashlib
+import random
 from datetime import datetime
 
 from flask import current_app
@@ -117,6 +118,25 @@ class Post(db.Model):
 
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
 
+    @staticmethod
+    def generate_fake(count=100):
+        from sqlalchemy.exc import IntegrityError
+        from random import seed
+        import forgery_py
+
+        seed()
+        for i in range(count):
+            p = Post(title=forgery_py.lorem_ipsum.sentence(),
+                     content=forgery_py.lorem_ipsum.sentence(),
+                     post_time=forgery_py.date.date(),
+                     user_id=1)
+
+            db.session.add(p)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -125,3 +145,22 @@ class Comment(db.Model):
     content = db.Column(db.Text)
     comment_time = db.Column(db.DateTime)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+    @staticmethod
+    def generate_fake(count=100):
+        from sqlalchemy.exc import IntegrityError
+        from random import seed
+        import forgery_py
+
+        seed()
+        for i in range(count):
+            c = Comment(email=forgery_py.internet.email_address(),
+                     content=forgery_py.lorem_ipsum.sentence(),
+                     comment_time=forgery_py.date.date(),
+                     post_id=random.randint(1,104))
+
+            db.session.add(c)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()

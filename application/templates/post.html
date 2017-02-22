@@ -13,6 +13,12 @@
             {{ post.content | safe }}
         </div>
     </div>
+    <div class="comment">
+        {{ wtf.quick_form(form) }}
+    </div>
+    <div class="comments-tabs">
+        {% include '_comments.html' %}
+    </div>
     {% if pagination %}
         <div class="pagination">
             {{ macros.pagination_widget(pagination, '.index') }}

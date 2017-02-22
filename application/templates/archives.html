@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Li's blog{% endblock %}
+
+{% block page_content %}
+    <h3>这里是归档：</h3>
+    {% for year in category %}
+        <h4>{{ year }}年</h4>
+        {% for month in category[year] %}
+            <h4>{{ month }}月</h4>
+            {% for post in category[year][month] %}
+                <a href="{{ url_for('.post',post_id=post.id) }}"><strong>{{ post.title }}</strong></a><br>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
