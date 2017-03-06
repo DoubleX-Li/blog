@@ -1,4 +1,5 @@
 # 基于Flask的博客
+## 
 ## 安装
 ```bash
 git clone https://github.com/DoubleX-Li/Blog.git
@@ -22,7 +23,7 @@ export LI_ADMIN
 source /etc/profile
 ```
 ### config.py
-
+修改数据库地址
 
 ### 数据库初始化
 ```bash
@@ -30,6 +31,6 @@ cd /path-to-Blog
 python manage.py db init
 python manage.py db migrate -m "initial migration"
 python manage.py db upgrade
-
 ```
-
+## 运行
+uwsgi --http :8001 --wsgi-file /path/to/Blog/manage.py --callable app -H /path/to/Blog/venv
