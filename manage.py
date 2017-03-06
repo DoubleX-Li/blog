@@ -2,6 +2,7 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager, Shell
 
 from application import create_app, db
+
 from application.models import User, Post, Comment
 
 app = create_app('default')

@@ -9,6 +9,7 @@ class Config:
     MAIL_SERVER = 'smtp.zoho.com'
     MAIL_PORT = 465
     MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_SUBJECT_PREFIX = "[Li's blog]"
@@ -19,7 +20,6 @@ class Config:
     SQLALCHEMY_RECORD_QUERIES = True
     SLOW_DB_QUERY_TIME = 0.5
 
-    # SSL_DISABLE = False
 
     @staticmethod
     def init_app(app):

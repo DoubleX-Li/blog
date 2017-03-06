@@ -3,7 +3,7 @@
 {% import "_macros.html" as macros %}
 
 {% block title %}{{ post.title }}{% endblock %}
-{% block imgUrl %}{{ url_for('static',filename='img/post-bg.jpg') }}{% endblock %}
+{% block imgUrl %}https://ooo.0o0.ooo/2017/03/06/58bd344b01346.png{% endblock %}
 {% block myHead %}{{ post.title }}{% endblock %}
 {% block mySubheading %}{% endblock %}
 
@@ -13,13 +13,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    {{ post.content | safe }}
+                    {{ post.content_html | safe }}
                 </div>
             </div>
         </div>
     </article>
     <hr>
-    <div class="add-comment">
+{#    {% include 'flash.html' %}#}
+    <div class="add-comment" id="add-comment">
         <div class="container">
             <div class="container">
                 <div class="row">

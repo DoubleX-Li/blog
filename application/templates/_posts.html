@@ -7,8 +7,19 @@
                         {{ post.title }}
                     </h2>
                 </a>
-                <p class="post-meta">Li发布于{{ moment(post.post_time).format('LLL') }}</p>
+                <p class="post-meta">
+                    <span>{{ current_user.username }} 发布于 {{ moment(post.post_time).format('LLL') }}</span>
+                    {% for tag in post.tags %}
+                        <span><a href="{{ url_for('main.tag',tag_id=tag.id) }}">{{ tag.tag_name }}</a></span>
+                    {% endfor %}
+                </p>
             </div>
+            {% if current_user.is_authenticated %}
+                <div>
+                    <a href="{{ url_for('main.alt_post',post_id=post.id) }}">修改文章</a>
+                    <a href="{{ url_for('main.delete_post',post_id=post.id) }}">删除文章</a>
+                </div>
+            {% endif %}
             <hr>
         </div>
     </div>
