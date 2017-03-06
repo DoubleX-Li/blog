@@ -1,0 +1,31 @@
+<style>
+    .comment {
+        height: 80px;
+        width: 100%;
+        padding: 5px;
+    }
+
+    .comment-image {
+        height: 60px;
+        width: 60px;
+        float: left;
+        padding: 5px;
+    }
+
+    .comment-text {
+        width: 90%;
+        float: left;
+        padding: 5px;
+    }
+</style>
+<p>{{ user.username }}，文章<a href="{{ url_for('main.post',post_id=post.id,_external=True) }}">《{{ post.title }}》</a>有新的评论：</p>
+<div class="comment">
+    <div class="comment-image">
+        <img src="{{ user.gravatar(email=comment.email,size=50) }}"/>
+    </div>
+    <div class="comment-text">
+        <span>{{ comment.email }}
+        <span>{{ comment.content }}</span>
+    </div>
+</div>
+

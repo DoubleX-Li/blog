@@ -1,0 +1,5 @@
+{{ user.username }}，文章《{{ post.title }}》有新的评论：
+
+{{ comment }}
+
+点击{{ url_for('main.post',post_id=post.id) }}查看详情

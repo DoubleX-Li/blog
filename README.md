@@ -1,10 +1,10 @@
 # 基于Flask的博客
 ## 安装
 ```bash
-pip install -r requirements
-python manage.py db init
-python manage.py db -m "initial migration"
-python manage.py db upgrade
+git clone https://github.com/DoubleX-Li/Blog.git
+cd Blog
+pip install -r requirements.txt
+pip install uwsgi
 ```
 ## 设置
 ### 环境变量
@@ -21,3 +21,15 @@ export LI_ADMIN
 ```bash
 source /etc/profile
 ```
+### config.py
+
+
+### 数据库初始化
+```bash
+cd /path-to-Blog
+python manage.py db init
+python manage.py db migrate -m "initial migration"
+python manage.py db upgrade
+
+```
+
