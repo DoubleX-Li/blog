@@ -5,7 +5,7 @@
 git clone https://github.com/DoubleX-Li/Blog.git
 cd Blog
 pip install -r requirements.txt
-pip install uwsgi
+pip install gunicorn
 ```
 ## 设置
 ### 环境变量
@@ -33,4 +33,25 @@ python manage.py db migrate -m "initial migration"
 python manage.py db upgrade
 ```
 ## 运行
-uwsgi --http :8001 --wsgi-file /path/to/Blog/manage.py --callable app -H /path/to/Blog/venv
+### 启动gunicorn
+gunicorn manage:app -p manage.pid -b 127.0.0.1:8000 -D
+
+### 启动nginx
+在`nginx.conf`文件中，添加
+```shell
+server {
+        listen       80;
+        server_name  ip_or_your_domain;
+
+        location / {
+			# Pass the request to Gunicorn
+			proxy_pass http://127.0.0.1:8000;
+
+			# Set some HTTP headers so that our app knows where the request really came from
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		}
+    }
+```
+
