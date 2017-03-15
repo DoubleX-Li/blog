@@ -170,12 +170,7 @@ def tag(tag_id):
 
 @main.route('/about')
 def about():
-    user = User.query.get(1)
-    about_me = user.about_me
-    if about_me:
-        return about_me
-    else:
-        return '没有简介'
+    return render_template('about.html')
 
 
 @main.route('/mail')
