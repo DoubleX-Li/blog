@@ -7,6 +7,7 @@ from flask import flash
 from flask import redirect
 from flask import render_template
 from flask import request
+from flask import send_from_directory
 from flask import url_for
 from flask.ext.login import current_user
 from flask.ext.login import login_required
@@ -181,3 +182,7 @@ def mail():
     send_email(to_address, '测试', 'auth/email/test_email')
     message = "Done!"
     return render_template('email.html', message=message)
+
+@main.route('/robots.txt')
+def static_from_root():
+    return send_from_directory(current_app.static_folder, request.path[1:])
