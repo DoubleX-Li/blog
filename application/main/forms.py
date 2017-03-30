@@ -17,6 +17,7 @@ class PostForm(Form):
 
 
 class CommentForm(Form):
+    name = StringField('姓名',validators=[DataRequired()])
     email = StringField('邮箱地址', validators=[DataRequired()])
-    content = StringField('评论内容', validators=[DataRequired()])
+    comment = TextAreaField('评论内容', validators=[DataRequired()])
     submit = SubmitField('提交')

@@ -15,7 +15,7 @@ class Config:
     MAIL_SUBJECT_PREFIX = "[Li's blog]"
     MAIL_SENDER = 'Blog Admin <admin@doublex.li>'
     ADMIN = os.environ.get('LI_ADMIN')
-    POSTS_PER_PAGE = 10
+    POSTS_PER_PAGE = 2
     COMMENTS_PER_PAGE = 10
     SQLALCHEMY_RECORD_QUERIES = True
     SLOW_DB_QUERY_TIME = 0.5

@@ -1,146 +1,247 @@
-{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-{% block title %}Li's blog.{% endblock %}
+    <script>(function () {
+        document.documentElement.className = 'js'
+    })();</script>
 
-{% block head %}
-    {{ super() }}
-    <!-- Theme CSS -->
-    <link href="{{ url_for('static',filename='css/clean-blog.css') }}" rel="stylesheet">
+    <!-- start open graph tags tags -->
 
-    <!-- Custom Fonts -->
-    <link href="{{ url_for('static',filename='font-awesome/css/font-awesome.css') }}" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
-          type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-          rel='stylesheet' type='text/css'>
-{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel='stylesheet' id='bootstrap-css'
+          href='https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css'
+          type='text/css' media='all'/>
+    <link rel='stylesheet' id='fontawesome-css'
+          href='https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='asalah-plugins-css'
+          href='../static/css/pluginstyle.css' type='text/css'
+          media='all'/>
+    <link rel='stylesheet' id='asalah-style-css'
+          href='../static/css/style.css' type='text/css'
+          media='all'/>
+
+    <script type='text/javascript'
+            src='https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
+
+    <script type='text/javascript'
+            src='../static/js/modernizr.js'></script>
+
+    <style type="text/css">@media screen and (min-width: 910px) {
+        .container {
+            width: 910px;
+        }
+    }
+
+    .top_menu_wrapper, .header_search > form.search .search_text, .sticky_header .top_menu_wrapper {
+    }
+
+    .skin_color, .skin_color_hover:hover, a, .user_info_button:hover, .header_social_icons a:hover, .blog_post_meta .blog_meta_item a:hover, .widget_container ul li a:hover, .asalah_post_gallery_nav_container ul.flex-direction-nav > li a:hover:before, .post_navigation_item:hover a.post_navigation_arrow, .comment_body p a:hover, .author_text .social_icons_list a:hover, .author_text .social_icons_list a:active {
+        color: #f47e00;
+    }
+
+    .skin_bg, .skin_bg_hover:hover, .blog_post_control_item a:hover, .widget_container.asalah-social-widget .widget_social_icon:hover, .tagcloud a:hover {
+        background-color: #f47e00;
+    }
+
+    .skin_border, .blog_post_control_item a, .navigation.pagination .nav-links .page-numbers:hover, .navigation.pagination .nav-links .page-numbers.current, .navigation_links a:hover {
+        border-color: #f47e00;
+    }
+
+    .skin_border_left {
+        border-left-color: #f47e00;
+    }
+
+    .skin_border_right {
+        border-right-color: #f47e00;
+    }
+
+    .skin_border_top {
+        border-top-color: #f47e00;
+    }
+
+    progress[value]::-webkit-progress-value {
+        background-color: #f47e00;
+    }
+
+    progress[value]::-moz-progress-bar {
+        background-color: #f47e00;
+    }
+
+    .skin_border_bottom, .comment_body p a:hover {
+        border-bottom-color: #f47e00;
+    }
+
+    .jr-insta-slider .jr-insta-thumb .thumbnails > li:nth-child(3n) {
+        margin-right: 0 !important;
+    }
+    </style>
+</head>
+
+<body class="home blog">
+
+<div id="page" class="hfeed site">
 
 
+    <!-- start site main container -->
+    <div class="site_main_container">
+        <!-- header -->
 
-{% block navbar %}
-    <!-- Navigation -->
-    <div class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    目录 <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="{{ url_for('main.index') }}">Li's blog</a>
+        <header class="site_header">
+            <!-- top menu area -->
+            <div class="top_menu_wrapper">
+                <div class="container">
+
+                    <div class="mobile_menu_button">
+                        <span class="mobile_menu_text">Menu</span>
+                        <span>-</span><span>-</span><span>-</span>
+                    </div>
+
+                    <div class="top_header_items_holder">
+
+                        <div class="main_menu pull-left">
+                            <div class="main_nav">
+                                <ul id="menu-main" class="nav navbar-nav">
+                                    <li id="menu-item-41"
+                                        class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-41 dropdown default_menu active">
+                                        <a href="{{ url_for('main.index') }}" >Li's blog</a>
+                                    </li>
+                                    <li id="menu-item-115"
+                                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-115 dropdown default_menu">
+                                        <a href="#" data-hover="dropdown" class="dropdown-toggle">Posts</a>
+                                        <ul role="menu" class=" dropdown-menu">
+                                            <li id="menu-item-116"
+                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-116 default_menu">
+                                                <a href="http://ahmad.works/writing/amazing-classic-interior-design-with-perfect-lighting/">Image
+                                                    Post</a></li>
+                                            <li id="menu-item-117"
+                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-117 default_menu">
+                                                <a href="http://ahmad.works/writing/two-smart-kids-reading-magazine-before-sleeping/">Gallery
+                                                    Post</a></li>
+                                            <li id="menu-item-118"
+                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-118 default_menu">
+                                                <a href="http://ahmad.works/writing/we-help-you-create-clean-modern-interior-design/">Video
+                                                    Post</a></li>
+                                            <li id="menu-item-119"
+                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-119 default_menu">
+                                                <a href="http://ahmad.works/writing/good-father-walking-on-the-beach-with-son/">Audio
+                                                    Post</a></li>
+                                            <li id="menu-item-120"
+                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-120 default_menu">
+                                                <a href="http://ahmad.works/writing/english-breakfast-tea-with-tasty-donut-desserts/">Post
+                                                    With Sidebar</a></li>
+                                            <li id="menu-item-175"
+                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-175 default_menu">
+                                                <a href="http://ahmad.works/writing/no-thing-found">404 Error
+                                                    Page</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="header_icons pull-right text_right">
+                            <!-- start header social icons -->
+                            <div class="social_icons_list header_social_icons pull-left"><a rel="nofollow"
+                                                                                            target="_blank" href="#"
+                                                                                            title="Facebook"
+                                                                                            class="social_icon social_facebook social_icon_facebook"><i
+                                    class="fa fa-facebook"></i></a><a rel="nofollow" target="_blank" href="#"
+                                                                      title="Twitter"
+                                                                      class="social_icon social_twitter social_icon_twitter"><i
+                                    class="fa fa-twitter"></i></a><a rel="nofollow" target="_blank" href="#"
+                                                                     title="Google Plus"
+                                                                     class="social_icon social_google-plus social_icon_google-plus"><i
+                                    class="fa fa-google-plus"></i></a><a rel="nofollow" target="_blank" href="#"
+                                                                         title="Behance"
+                                                                         class="social_icon social_behance social_icon_behance"><i
+                                    class="fa fa-behance"></i></a><a rel="nofollow" target="_blank" href="#"
+                                                                     title="Dribbble"
+                                                                     class="social_icon social_dribbble social_icon_dribbble"><i
+                                    class="fa fa-dribbble"></i></a><a rel="nofollow" target="_blank" href="#"
+                                                                      title="Instagram"
+                                                                      class="social_icon social_instagram social_icon_instagram"><i
+                                    class="fa fa-instagram"></i></a><a rel="nofollow" target="_blank" href="#"
+                                                                       title="RSS"
+                                                                       class="social_icon social_rss social_icon_rss"><i
+                                    class="fa fa-rss"></i></a></div><!-- end header social icons -->
+
+                            <!-- start search box -->
+                            <div class="header_search pull-right">
+                                <form class="search clearfix animated searchHelperFade" method="get" id="searchform"
+                                      action="https://ahmad.works/writing/">
+                                    <input class="col-md-12 search_text" id="appendedInputButton"
+                                           placeholder="Hit enter to search" type="text" name="s">
+                                    <input type="hidden" name="post_type" value="post"/>
+                                    <i class="fa fa-search"><input type="submit" class="search_submit"
+                                                                   id="searchsubmit"
+                                                                   value=""/></i>
+                                </form>
+                            </div>
+                            <!-- end search box -->
+                        </div>
+                    </div> <!-- end .top_header_items_holder -->
+
+                </div>
             </div>
+        </header>
+        <!-- header -->
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_authenticated %}
-                        <li>
-                            <a href="{{ url_for('main.add_post') }}">新建文章</a>
-                        </li>
-                    {% endif %}
-                    <li>
-                        <a href="{{ url_for('main.index') }}">主页</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('main.archives') }}">归档</a>
-                    </li>
-                    {#                    <li>#}
-                    {#                        <a href="post.html">Sample Post</a>#}
-                    {#                    </li>#}
-                    <li>
-                        <a href="{{ url_for('main.about') }}">关于我</a>
-                    </li>
-                    {% if current_user.is_authenticated %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ current_user.gravatar(email=current_user.email,size=18) }}">
-                                账户 <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url_for('auth.change_password') }}">更改密码</a></li>
-                                <li><a href="{{ url_for('auth.change_email_request') }}">更改邮箱地址</a></li>
-                                <li><a href="{{ url_for('auth.logout') }}">注销</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li><a href="{{ url_for('auth.login') }}">登录</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-    </div>
-{% endblock %}
-{% block content %}
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('{% block imgUrl %}{% endblock %}')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>{% block myHead %}{% endblock %}</h1>
-                        <hr class="small">
-                        <span class="subheading">{% block mySubheading %}{% endblock %}</span>
+        <!-- start stie content -->
+        <section id="content" class="site_content">
+            <div class="container">
+                <div class="row">
+
+
+                    {% block page_content %}{% endblock %}
+
+
+                </div> <!-- .row -->
+            </div> <!-- .container -->
+        </section> <!-- .site_content -->
+
+        <footer class="site-footer">
+            <h3 class="screen-reader-text">Site Footer</h3>
+            <div class="footer_wrapper">
+                <div class="container">
+
+                    <div class="second_footer has_first_footer row">
+                        <div class="col-md-12">
+                            <div class="second_footer_content_wrapper footer_credits">
+                                Copyright © Li's blog {{ moment().format('YYYY') }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-    <div class="content">
-        <div class="container">
-            {% block page_content %}{% endblock %}
-        </div>
-    </div>
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
-                            <a href="https://twitter.com/DoubleXLi">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mailto:me@doublex.li">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/DoubleX-Li">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Li's blog 2017</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-{% endblock %}
+        </footer><!-- .site-footer -->
+    </div><!-- .site_main_container -->
 
-<hr>
+</div><!-- .site -->
 
-{% block scripts %}
-    {{ super() }}
-    {{ moment.include_moment() }}
-    {{ moment.lang("zh-CN") }}
-    <!-- Contact Form JavaScript -->
-    <script src="{{ url_for('static',filename='js/jqBootstrapValidation.js') }}"></script>
-    <script src="{{ url_for('static',filename='js/contact_me.js') }}"></script>
 
-    <!-- Theme JavaScript -->
-    <script src="{{ url_for('static',filename='js/clean-blog.js') }}"></script>
-{% endblock %}
+{{ moment.include_moment() }}
+{{ moment.lang("zh-CN") }}
+<script type='text/javascript'
+        src='../static/js/jquery.form.min.js'></script>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var _wpcf7 = {
+        "loaderUrl": "https:\/\/ahmad.works\/writing\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif",
+        "sending": "Sending ..."
+    };
+    /* ]]> */
+</script>
+<script type='text/javascript'
+        src='https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<!--搜索js-->
+<script type='text/javascript'
+        src='https://awcdn1.ahmad.works/writing/wp-content/themes/writing/js/asalah.js?ver=3.06'></script>
+
+</body>
+</html>

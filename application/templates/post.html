@@ -1,62 +1,132 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+
 {% import "_macros.html" as macros %}
 
 {% block title %}{{ post.title }}{% endblock %}
 {% block imgUrl %}https://ooo.0o0.ooo/2017/03/06/58bd344b01346.png{% endblock %}
-{% block myHead %}{{ post.title }}{% endblock %}
-{% block mySubheading %}{% endblock %}
 
 {% block page_content %}
     <!-- Post Content -->
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    {{ post.content_html | safe }}
+    <main class="main_content col-md-12">
+        <div class="blog_posts_wrapper blog_single blog_posts_single">
+
+            <div id="post-74"
+                 class="blog_post_container post-74 post type-post status-publish format-image has-post-thumbnail hentry category-images-posts category-life-style tag-people post_format-post-format-image">
+
+
+                <div class="blog_post clearfix">
+
+
+                    <div class="blog_post_banner blog_post_image"><img width="960" height="636"
+                                                                       src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer.jpg"
+                                                                       class="img-responsive wp-post-image"
+                                                                       alt="Resturant-Employer"
+                                                                       srcset="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer-300x199.jpg 300w, https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer.jpg 960w"
+                                                                       sizes="(max-width: 960px) 100vw, 960px"/>
+                    </div>
+                    {% include '_header.html' %}
+
+
+                    <div class="entry-content blog_post_text blog_post_description">
+                        {{ post.content_html | safe }}
+
+                    </div>
+
+                    <div class="blog_post_control clearfix">
+
+                        {% include '_share.html' %}
+                    </div>
+
+
                 </div>
-            </div>
-        </div>
-    </article>
-    <hr>
-{#    {% include 'flash.html' %}#}
-    <div class="add-comment" id="add-comment">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        {% for message in get_flashed_messages() %}
-                            <div class="alert alert-warning">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                {{ message }}
+            </div><!-- #post-## -->
+
+            <!-- Reading progress bar -->
+            <div class="author_box author-info">
+                <div class="author-avatar">
+                    <a class="author-link" href="{{ url_for('main.about') }}"
+                       rel="author">
+                        <img src="{{ post.user_id | author_avatar }}"
+                             width="80" height="80" alt="{{ post.user_id | author_name }}"
+                             class="avatar avatar-80 wp-user-avatar wp-user-avatar-80 alignnone photo"/>
+                    </a>
+                </div><!-- .author-avatar -->
+
+                <div class="author-description author_text">
+                    <h3 class="author-title">
+                        <a class="author-link" href="{{ url_for('main.about') }}"
+                           rel="author">{{ post.user_id | author_name }}</a>
+                    </h3>
+
+                    <p class="author-bio">
+                        {{ post.user_id | author_about }}</p><!-- .author-bio -->
+
+                    <div class="social_icons_list">
+
+
+                    </div>
+
+                </div><!-- .author-description -->
+            </div><!-- .author-info -->
+            <section class='post_navigation'>
+                <div class='row'><h3 class="screen-reader-text">Post Navigation</h3>
+                    {% if True %}
+                        {#                    {% if post.prev %}    #}
+                        <div class="post_navigation_item post_navigation_prev has_post_thumbnail  col-md-6">
+                            <a class="post_navigation_arrow"
+                                    {#                           href="{{ url_for('main.post',post_id=post.prev) }}"#}
+                               href="{{ url_for('main.post',post_id=1) }}"
+                               title="{{ 1 | post_title }}" rel="prev">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                            <div class="post_thumbnail_wrapper">
+                                <a href="{{ url_for('main.post',post_id=1) }}"
+                                   title="{{ 1 | post_title }}" rel="prev">
+                                    <img width="60" height="60"
+                                         src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Talking-Coworkers-150x150.jpg"
+                                         class="img-responsive wp-post-image" alt="Talking-Coworkers"/> </a>
                             </div>
-                        {% endfor %}
+                            <div class="post_info_wrapper">
+                                {#                            <a href="{{ url_for('main.post',post_id=1) }}"#}
+                                {#                               title="{{ 1 | post_title }}" rel="prev">#}
+                                {#                                <span class="post_navigation_title title">Previous Post:</span>#}
+                                {#                            </a>#}
+                                Previous Post:
+                                <h4 class="title post_title"><a
+                                        href="{{ url_for('main.post',post_id=1) }}">{{ 1 | post_title }}</a></h4>
+                                <p></p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="post_navigation_item post_navigation_next has_post_thumbnail pull-right col-md-6">
+                        <a class="post_navigation_arrow"
+                           href="{{ url_for('main.post',post_id=3) }}"
+                           title="{{ 3 | post_title }}" rel="next">
+                            <i class="fa fa-angle-double-right"></i>
+                        </a>
+                        <div class="post_thumbnail_wrapper">
+                            <a href="{{ url_for('main.post',post_id=3) }}"
+                               title="{{ 3 | post_title }}" rel="next">
+                                <img width="60" height="60"
+                                     src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Desserts-150x150.jpg"
+                                     class="img-responsive wp-post-image" alt="Desserts"/> </a>
+                        </div>
+                        <div class="post_info_wrapper">
+                            {#                            <a href="{{ url_for('main.post',post_id=3) }}"#}
+                            {#                               title="{{ 3 | post_title }}" rel="next">#}
+                            {#                                <span class="post_navigation_title title">Next Post:</span>#}
+                            {#                            </a>#}
+                            Next Post:
+                            <h4 class="title post_title"><a
+                                    href="{{ url_for('main.post',post_id=3) }}">{{ 3 | post_title }}</a></h4>
+                            <p></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p>发表评论</p>
-                    {{ wtf.quick_form(form) }}
-                </div>
-            </div>
-        </div>
+            </section>
 
-        <hr>
-    </div>
-    <div class="comments" id="comments">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p>评论内容如下：</p>
-                    {% include '_comments.html' %}
-                </div>
-            </div>
-        </div>
-    </div>
-    {% if pagination %}
-        <div class="pagination">
-            {{ macros.pagination_widget(pagination, '.post',post_id=post.id ,_anchor='comments') }}
-        </div>
-    {% endif %}
+            {% include '_comments.html' %}
+        </div><!-- .blog_posts_wrapper -->
+    </main><!-- .main_content -->
+    <hr>
 {% endblock %}

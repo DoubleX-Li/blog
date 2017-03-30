@@ -99,6 +99,10 @@ class User(UserMixin, db.Model):
         db.session.add(self)
 
     @staticmethod
+    def name(id):
+        return User.query.get(id).username
+
+    @staticmethod
     def gravatar(size=100, email=email, default='identicon', rating='g'):
         url = 'https://cdn.v2ex.com/gravatar'
         hash = hashlib.md5(email.encode('utf-8')).hexdigest()
@@ -184,6 +188,7 @@ class Comment(db.Model):
     email = db.Column(db.String(120))
     content = db.Column(db.Text)
     comment_time = db.Column(db.DateTime)
+    author_name = db.Column(db.String(120))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
     @staticmethod

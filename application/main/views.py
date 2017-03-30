@@ -103,10 +103,11 @@ def post(post_id):
         flash('没有找到文章')
         return redirect('main.index')
     if form.validate_on_submit():
+        name = form.name.data
         email = form.email.data
-        content = form.content.data
+        content = form.comment.data
         comment_time = datetime.utcnow()
-        comment = Comment(email=email, content=content, comment_time=comment_time, post_id=post_id)
+        comment = Comment(author_name=name,email=email, content=content, comment_time=comment_time, post_id=post_id)
         db.session.add(comment)
         db.session.commit()
         flash('成功添加评论')
@@ -116,13 +117,14 @@ def post(post_id):
         author = User.query.get(1)
         to_address = author.email
         send_email(to_address, '新的评论', 'auth/email/new_comment', user=author, post=post, comment=comment)
-        return redirect(url_for('.post', post_id=post_id, _anchor='add-comment'))
+        return redirect(url_for('main.post', post_id=post_id, _anchor='comments'))
 
-    pagination = Comment.query.filter_by(post_id=post_id).order_by(Comment.comment_time.desc()).paginate(
-        page, per_page=current_app.config['COMMENTS_PER_PAGE'],
-        error_out=False)
-    comments = pagination.items
-    return render_template('post.html', post=post, form=form, comments=comments, User=User, pagination=pagination)
+    # pagination = Comment.query.filter_by(post_id=post_id).order_by(Comment.comment_time.desc()).paginate(
+    #     page, per_page=current_app.config['COMMENTS_PER_PAGE'],
+    #     error_out=False)
+    # comments = pagination.items
+    comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.comment_time.desc())
+    return render_template('post.html', post=post, form=form, comments=comments, User=User)#, pagination=pagination
 
 
 @main.route('/archives', methods=['GET'])

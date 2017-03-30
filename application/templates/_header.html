@@ -1,0 +1,33 @@
+<div class="blog_post_title">
+    <h2 class="entry-title title post_title"><a
+            href="{{ url_for('main.post',post_id=post.id, _external=True) }}"
+            rel="bookmark">{{ post.title }}</a></h2></div>
+
+<div class="blog_post_meta clearfix">
+                        <span class="blog_meta_item blog_meta_author">
+                                        <span class="author vcard">
+
+                                            <img
+                                                    src="{{ post.user_id | author_avatar }}"
+                                                    onclick="window.open('{{ url_for('main.about') }}');return false;"
+                                                    width="25" height="25" alt="John Doe"
+                                                    class="avatar avatar-25 wp-user-avatar wp-user-avatar-25 alignnone photo"/>
+                                        </span>
+                                    </span>
+
+    <span class="blog_meta_item blog_meta_date">
+                                        <span class="screen-reader-text"></span>
+                                        <time class="entry-date published"
+                                              datetime="{{ post.post_time }}">{{ moment(post.post_time).format('LLL') }}</time>
+                                    </span>
+
+    <span
+            class="blog_meta_item blog_meta_tags">Tags
+        {% for tag in post.tags %}
+            <a href="{{ url_for('main.tag',tag_id=tag.id) }}"
+               rel="tag">{{ tag.tag_name }}</a>
+        {% endfor %}
+                                    </span>
+
+
+</div>

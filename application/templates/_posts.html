@@ -1,28 +1,47 @@
 {% for post in posts %}
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="post-preview">
-                <a href="{{ url_for('.post',post_id=post.id) }}">
-                    <h2 class="post-title">
-                        {{ post.title }}
-                    </h2>
-                </a>
-                <p class="post-meta">
-                    <span>{{ current_user.username }} 发布于 {{ moment(post.post_time).format('LLL') }}</span>
-                    {% for tag in post.tags %}
-                        <span><a href="{{ url_for('main.tag',tag_id=tag.id) }}">{{ tag.tag_name }}</a></span>
-                    {% endfor %}
-                </p>
-            </div>
-            {% if current_user.is_authenticated %}
-                <div>
-                    <a href="{{ url_for('main.alt_post',post_id=post.id) }}">修改文章</a>
-                    <a href="{{ url_for('main.delete_post',post_id=post.id) }}">删除文章</a>
+    <article id="post-{{ post.id }}"
+             class="blog_post_container post-{{ post.id }} post type-post status-publish format-image has-post-thumbnail hentry category-images-posts category-life-style tag-people post_format-post-format-image">
+
+
+        <div class="blog_post clearfix">
+            <div class="posts_list_wrapper clearfix">
+                <div class="post_thumbnail_wrapper">
+                    <div class="blog_post_banner blog_post_image"><a
+                            href="{{ url_for('main.post',post_id=post.id, _external=True) }}"
+                            title="{{ post.title }}"><img
+                            width="940" height="400"
+                            src="https://i.ytimg.com/vi/OvhoYbjtiKc/maxresdefault.jpg"
+                            class="img-responsive wp-post-image" alt="Resturant-Employer"/></a>
+                    </div>
                 </div>
-            {% endif %}
-            <hr>
+                <div class="post_info_wrapper">
+                    <!-- use this wrapper in list style only to group all info far from thumbnail wrapper -->
+
+
+                    {% include '_header.html' %}
+
+                    <div class="entry-content blog_post_text blog_post_description">
+                        <p>{{ post.content | part_text }}
+                            &hellip;
+                        </p>
+                    </div>
+
+                    <div class="blog_post_control clearfix">
+
+
+                        <div class="blog_post_control_item blog_post_readmore">
+                            <a href="{{ url_for('main.post',post_id=post.id, _external=True) }}"
+                               class="read_more_link">Continue Reading</a></div>
+
+                        {% include '_share.html' %}
+                    </div>
+
+                </div>
+                <!-- .post_info_wrapper close post_info_wrapper in cas of list style-->
+            </div> <!-- .posts_list_wrapper -->
+
         </div>
-    </div>
+    </article><!-- #post-## -->
 {% endfor %}
 
 

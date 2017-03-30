@@ -1,22 +1,21 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{#{% import "bootstrap/wtf.html" as wtf %}#}
 {% import "_macros.html" as macros %}
 
 {% block title %}Li's blog{% endblock %}
-{% block imgUrl %}https://ooo.0o0.ooo/2017/03/06/58bd39732bd84.jpg{% endblock %}
-{% block myHead %}Li's blog{% endblock %}
-{% block mySubheading %}写字的地方{% endblock %}
 
 {% block page_content %}
 
-    <!-- Main Content -->
-    <div class="container">
-        {% include '_posts.html' %}
-        {% if pagination %}
-            <div class="pagination">
-                {{ macros.pagination_widget(pagination, '.index')}}
-            </div>
-        {% endif %}
-    </div>
-    <hr>
+    <h4 class="page-title screen-reader-text">Blog Posts</h4>
+    <main class="main_content col-md-12">
+
+
+        <div class="blog_posts_wrapper blog_posts_list clearfix  banners_blog_style">
+            {% include '_posts.html' %}
+
+            <!-- Reading progress bar -->
+        </div> <!-- .blog_posts_wrapper -->
+
+        {{ macros.pagination_widget(pagination, 'main.index') }}
+    </main><!-- .main_content -->
 {% endblock %}

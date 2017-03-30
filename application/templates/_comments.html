@@ -1,14 +1,65 @@
-<div class="comments">
-    {% for comment in comments %}
-        <div class="comment">
-            <div class="comment-image">
-                <img src="{{ User.gravatar(email=comment.email,size=50) }}"/>
+<section id="comments" class="comments-area">
+
+    <h3 class="comments-title title">
+        {{ comments.count() }} comments
+        <span class="screen-reader-text">On Restaurant Employer Read Clients Orders On His iPad</span>
+
+    </h3>
+
+
+    <ul class="media-list comments_list col-md-12">
+        {% for comment in comments %}
+            <li class="comment byuser comment-author-ahmad bypostauthor even thread-even depth-1 media the_comment"
+                id="comment-{{ loop.index }}">
+                <a class="pull-left commenter" href="#">
+                    <img src="{{ comment.email | avatar }}"
+                         width="50"
+                         height="50" alt="ahmad"
+                         class="avatar avatar-50 wp-user-avatar wp-user-avatar-50 alignnone photo"/>
+                </a>
+                <div class="media-body comment_body">
+                    <div class="comment_content_wrapper">
+                        <div class="media-heading clearfix">
+                            <b class="commenter_name title">{{ comment.author_name }}</b>
+                            <div class="comment_info"><a class="comment_time"
+                                                         href="{{ url_for('main.post',post_id=post.id) }}#comment-{{ loop.index }}">
+                                <time pubdate
+                                      datetime="{{ comment.comment_time }}">{{ moment(comment.comment_time).format('LLL') }}</time>
+                            </a></div>
+                        </div>
+
+                        {{ comment.content | safe }}
+                    </div>
+                </div>
+            </li><!-- #comment-## -->
+        {% endfor %}
+
+
+    </ul>
+
+
+    <div id="respond" class="comment-respond">
+        <h3 id="reply-title" class="comment-reply-title">请留下评论：
+            <small><a rel="nofollow" id="cancel-comment-reply-link"
+                      href="{{ url_for('main.post',post_id=post.id) }}#respond"
+                      style="display:none;">取消回复</a></small>
+        </h3>
+        <form action="" method="post" id="commentform" class="comment-form" novalidate>
+            <p class="comment-notes">你的电子邮件不会出现在评论中。</p>
+            <div class="row">
+                <div class="comment_textarea clearfix col-md-12">
+                    {{ form.comment(id="comment",class_="col-md-12",rows="7") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.name(id="author",class_="form-control col-md-12",type="text",placeholder="姓名") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.email(id="email",class_="form-control col-md-12",type="text",placeholder="电子邮件") }}
+                </div>
             </div>
-            <div class="comment-text">
-                <span>{{ comment.email }} - </span>
-                <span>{{ moment(comment.comment_time).fromNow() }}</span><br>
-                <span>{{ comment.content }}</span>
-            </div>
-        </div>
-    {% endfor %}
-</div>
+            {{ form.csrf_token }}
+            {{ form.submit }}
+        </form>
+    </div><!-- #respond -->
+
+</section><!-- .comments-area -->

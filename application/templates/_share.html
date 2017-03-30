@@ -1,0 +1,36 @@
+<div class="blog_post_control_item blog_post_share">
+    <span class="share_item share_sign"><i class="fa fa-share "></i></span>
+
+    <span class="social_share_item_wrapper"><a rel="nofollow"
+                                               href="https://www.facebook.com/sharer/sharer.php?u={{ url_for('main.post',post_id=post.id, _external=True) }}"
+                                               class="share_item share_item_social share_facebook"
+                                               onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{ url_for('main.post',post_id=post.id, _external=True) }}', 'facebook-share-dialog', 'width=626,height=436');
+                                                       return false;"><i class="fa fa-facebook"></i></a></span>
+
+    <span class="social_share_item_wrapper"><a rel="nofollow"
+                                               href="https://twitter.com/share?url={{ url_for('main.post',post_id=post.id, _external=True) }}"
+                                               target="_blank"
+                                               class="share_item share_item_social share_twitter"><i
+            class="fa fa-twitter"></i></a></span>
+
+    <span class="social_share_item_wrapper"><a rel="nofollow"
+                                               href="https://plus.google.com/share?url={{ url_for('main.post',post_id=post.id, _external=True) }}"
+                                               onclick="javascript:window.open(this.href,
+                                        '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+                                return false;" class="share_item share_item_social share_googleplus"><i
+            class="fa fa-google-plus"></i></a></span>
+
+    <span class="social_share_item_wrapper"><a rel="nofollow"
+                                               href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ url_for('main.post',post_id=post.id, _external=True) }}"
+                                               target="_blank"
+                                               class="share_item share_item_social share_linkedin"><i
+            class="fa fa-linkedin"></i></a></span>
+
+    <span class="social_share_item_wrapper"><a rel="nofollow"
+                                               href="https://www.pinterest.com/pin/create/button/?url={{ url_for('main.post',post_id=post.id, _external=True) }}&amp;media=https://ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer.jpg&amp;description=Restaurant%20Employer%20Read%20Clients%20Orders%20On%20His%20iPad"
+                                               class="share_item share_item_social share_pinterest"
+                                               target="_blank"><i
+            class="fa fa-pinterest"></i></a></span>
+
+
+</div>
