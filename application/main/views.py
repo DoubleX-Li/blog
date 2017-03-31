@@ -48,11 +48,11 @@ def add_post():
     return render_template('add_post.html', form=form)
 
 
-@main.route('/delete_post/<int:post_id>', methods=['POST'])
+@main.route('/delete_post/<int:post_id>', methods=['GET','POST'])
 @login_required
 def delete_post(post_id):
     post = Post.query.get(post_id)
-    db.session.remove(post)
+    db.session.delete(post)
     db.session.commit()
     return redirect(url_for('.index'))
 
