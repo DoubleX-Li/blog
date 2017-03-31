@@ -1,13 +1,8 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}文章归档 - Li's blog{% endblock %}
-{% block imgUrl %}https://ooo.0o0.ooo/2017/03/06/58bd35bb2a3d8.jpg{% endblock %}
-{% block myHead %}文章归档{% endblock %}
 
 {% block page_content %}
-
-
     <div id="categories-4" class="widget_container widget_content widget widget_categories clearfix">
         <h4 class="widget_title title"><span class="page_header_title">Categories</span></h4>
         {% for year in category %}
@@ -23,19 +18,11 @@
                 </ul>
             {% endfor %}
         {% endfor %}
-
     </div>
-
     <hr>
-    {#    <h3>#}
-    {#    标签云#}
-    {#    </h3>#}
-    {#    {% for tag in tags %}#}
-    {#        <a href="{{ url_for('main.tag', tag_id=tag.id) }}">{{ tag.tag_name }}</a>#}
-    {#    {% endfor %}#}
+
     <div id="tag_cloud-3" class="widget_container widget_content widget widget_tag_cloud clearfix">
         <h4 class="widget_title title"><span class="page_header_title">Tags</span></h4>
-
         <div class="tagcloud">
             {% for tag in tags %}
                 <a href='{{ url_for('main.tag',tag_id=tag.id) }}' class='tag-link-{{ loop.index }}'

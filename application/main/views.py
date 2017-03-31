@@ -36,8 +36,9 @@ def add_post():
         title = form.title.data
         content = form.content.data
         tag_names = form.new_tag.data
+        img = form.img.data
         post_time = datetime.utcnow()
-        post = Post(title=title, content=content, post_time=post_time, user_id=current_user.id)
+        post = Post(title=title, content=content, img=img, post_time=post_time, user_id=current_user.id)
         for tag_name in tag_names.split(','):
             post.addTag(tag_name)
         db.session.add(post)
@@ -64,6 +65,7 @@ def alt_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         tag_names = form.new_tag.data
+        post.img = form.img.data
         post.content = form.content.data
         for tag_name in tag_names.split(','):
             post.addTag(tag_name)
@@ -80,6 +82,7 @@ def alt_post(post_id):
     else:
         # GET请求时，处理form的tittle和content数据，以免传递post
         form.title.data = post.title
+        form.img.data = post.img
         form.content.data = post.content
         new_tag_str = ''
         for i, tag in enumerate(post.tags):
@@ -99,6 +102,10 @@ def post(post_id):
     if page:
         form = CommentForm()
         post = Post.query.get(post_id)
+        prev_post = Post.query.order_by(Post.id.desc()).filter(Post.id < post_id).first() or None
+        print(prev_post)
+        next_post = Post.query.order_by(Post.id.asc()).filter(Post.id > post_id).first() or None
+        print(next_post)
     else:
         flash('没有找到文章')
         return redirect('main.index')
@@ -107,7 +114,7 @@ def post(post_id):
         email = form.email.data
         content = form.comment.data
         comment_time = datetime.utcnow()
-        comment = Comment(author_name=name,email=email, content=content, comment_time=comment_time, post_id=post_id)
+        comment = Comment(author_name=name, email=email, content=content, comment_time=comment_time, post_id=post_id)
         db.session.add(comment)
         post = Post.query.get(post_id)
         post.last_comment_time = datetime.utcnow()
@@ -120,14 +127,16 @@ def post(post_id):
         author = User.query.get(1)
         to_address = author.email
         send_email(to_address, '新的评论', 'auth/email/new_comment', user=author, post=post, comment=comment)
-        return redirect(url_for('main.post', post_id=post_id, _anchor='comments'))
+        return redirect(
+            url_for('main.post', post_id=post_id, _anchor='comments'))
 
     # pagination = Comment.query.filter_by(post_id=post_id).order_by(Comment.comment_time.desc()).paginate(
     #     page, per_page=current_app.config['COMMENTS_PER_PAGE'],
     #     error_out=False)
     # comments = pagination.items
     comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.comment_time.desc())
-    return render_template('post.html', post=post, form=form, comments=comments, User=User)#, pagination=pagination
+    return render_template('post.html', post=post, form=form, prev_post=prev_post, next_post=next_post,
+                           comments=comments, User=User)  # , pagination=pagination
 
 
 @main.route('/archives', methods=['GET'])
@@ -155,7 +164,7 @@ def archives():
             if len(result[year][month]) != 0:
                 category[year][month] = result[year][month]
     tags = Tag.query.all()
-    return render_template('archives.html', category=category,tags=tags)
+    return render_template('archives.html', category=category, tags=tags)
 
 
 @main.route('/tag/<int:tag_id>')
@@ -187,6 +196,7 @@ def mail():
     send_email(to_address, '测试', 'auth/email/test_email')
     message = "Done!"
     return render_template('email.html', message=message)
+
 
 @main.route('/robots.txt')
 def static_from_root():

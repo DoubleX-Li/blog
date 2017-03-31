@@ -4,10 +4,28 @@
 
 {% block title %}新建文章 - Li's blog{% endblock %}
 
+
 {% block page_content %}
     <div>
         {% if current_user.is_authenticated %}
-            {{ wtf.quick_form(form) }}
+            <form action="" method="post" id="commentform" class="comment-form" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.title(id="title",class_="form-control col-md-12",type="text",placeholder="标题") }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.new_tag(id="new_tag",class_="form-control col-md-12",type="text",placeholder="标签") }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.img(id="img",class_="form-control col-md-12",type="text",placeholder="图片地址") }}
+                    </div>
+                    <div class="comment_textarea clearfix col-md-12">
+                        {{ form.content(class_="col-md-12",rows="30") }}
+                    </div>
+                </div>
+                {{ form.csrf_token }}
+                {{ form.submit }}
+            </form>
         {% endif %}
     </div>
 {% endblock %}

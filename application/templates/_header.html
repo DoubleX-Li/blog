@@ -1,7 +1,12 @@
 <div class="blog_post_title">
     <h2 class="entry-title title post_title"><a
             href="{{ url_for('main.post',post_id=post.id, _external=True) }}"
-            rel="bookmark">{{ post.title }}</a></h2></div>
+            rel="bookmark">{{ post.title }}</a></h2>
+    {% if current_user.is_authenticated %}
+    <span><a href="{{ url_for('main.alt_post',post_id=post.id) }}">修改文章</a></span>
+    <span><a href="{{ url_for('main.delete_post',post_id=post.id) }}">删除文章</a></span>
+    {% endif %}
+</div>
 
 <div class="blog_post_meta clearfix">
                         <span class="blog_meta_item blog_meta_author">

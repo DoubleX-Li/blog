@@ -181,6 +181,9 @@ class Post(db.Model):
         if self.postDontHaveTag(tag):
             self.tags.append(tag)
 
+    def __repr__(self):
+        return "<Post: %r>" % self.title
+
 db.event.listen(Post.content, 'set', Post.on_changed_content)
 
 class Comment(db.Model):

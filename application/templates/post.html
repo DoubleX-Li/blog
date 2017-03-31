@@ -3,7 +3,6 @@
 {% import "_macros.html" as macros %}
 
 {% block title %}{{ post.title }}{% endblock %}
-{% block imgUrl %}https://ooo.0o0.ooo/2017/03/06/58bd344b01346.png{% endblock %}
 
 {% block page_content %}
     <!-- Post Content -->
@@ -18,10 +17,10 @@
 
 
                     <div class="blog_post_banner blog_post_image"><img width="960" height="636"
-                                                                       src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer.jpg"
+                                                                       src="{{ post.img }}"
                                                                        class="img-responsive wp-post-image"
                                                                        alt="Resturant-Employer"
-                                                                       srcset="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer-300x199.jpg 300w, https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer.jpg 960w"
+{#                                                                       srcset="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer-300x199.jpg 300w, https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer.jpg 960w"#}
                                                                        sizes="(max-width: 960px) 100vw, 960px"/>
                     </div>
                     {% include '_header.html' %}
@@ -70,58 +69,50 @@
             </div><!-- .author-info -->
             <section class='post_navigation'>
                 <div class='row'><h3 class="screen-reader-text">Post Navigation</h3>
-                    {% if True %}
-                        {#                    {% if post.prev %}    #}
+                    {% if prev_post is not none %}
                         <div class="post_navigation_item post_navigation_prev has_post_thumbnail  col-md-6">
                             <a class="post_navigation_arrow"
-                                    {#                           href="{{ url_for('main.post',post_id=post.prev) }}"#}
-                               href="{{ url_for('main.post',post_id=1) }}"
-                               title="{{ 1 | post_title }}" rel="prev">
+                               href="{{ url_for('main.post',post_id=prev_post.id) }}"
+                               title="{{ prev_post.title }}" rel="prev">
                                 <i class="fa fa-angle-double-left"></i>
                             </a>
                             <div class="post_thumbnail_wrapper">
-                                <a href="{{ url_for('main.post',post_id=1) }}"
-                                   title="{{ 1 | post_title }}" rel="prev">
-                                    <img width="60" height="60"
-                                         src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Talking-Coworkers-150x150.jpg"
-                                         class="img-responsive wp-post-image" alt="Talking-Coworkers"/> </a>
+                                <a href="{{ url_for('main.post',post_id=prev_post.id) }}"
+                                   title="{{ prev_post.title }}" rel="prev">
+                                    <img style="width:60px;height:60px;!important;"
+                                         src="{{ prev_post.img }}"
+                                         class="img-responsive wp-post-image" alt="post image"/> </a>
                             </div>
                             <div class="post_info_wrapper">
-                                {#                            <a href="{{ url_for('main.post',post_id=1) }}"#}
-                                {#                               title="{{ 1 | post_title }}" rel="prev">#}
-                                {#                                <span class="post_navigation_title title">Previous Post:</span>#}
-                                {#                            </a>#}
                                 Previous Post:
                                 <h4 class="title post_title"><a
-                                        href="{{ url_for('main.post',post_id=1) }}">{{ 1 | post_title }}</a></h4>
+                                        href="{{ url_for('main.post',post_id=prev_post.id) }}">{{ prev_post.title }}</a></h4>
                                 <p></p>
                             </div>
                         </div>
                     {% endif %}
+                    {% if next_post is not none %}
                     <div class="post_navigation_item post_navigation_next has_post_thumbnail pull-right col-md-6">
                         <a class="post_navigation_arrow"
-                           href="{{ url_for('main.post',post_id=3) }}"
-                           title="{{ 3 | post_title }}" rel="next">
+                           href="{{ url_for('main.post',post_id=next_post.id) }}"
+                           title="{{ next_post.title }}" rel="next">
                             <i class="fa fa-angle-double-right"></i>
                         </a>
                         <div class="post_thumbnail_wrapper">
-                            <a href="{{ url_for('main.post',post_id=3) }}"
-                               title="{{ 3 | post_title }}" rel="next">
-                                <img width="60" height="60"
-                                     src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Desserts-150x150.jpg"
-                                     class="img-responsive wp-post-image" alt="Desserts"/> </a>
+                            <a href="{{ url_for('main.post',post_id=next_post.id) }}"
+                               title="{{ next_post.title }}" rel="next">
+                                <img style="width:60px;height:60px;!important;"
+                                     src="{{ next_post.img }}"
+                                     class="img-responsive wp-post-image" alt="post image"/> </a>
                         </div>
                         <div class="post_info_wrapper">
-                            {#                            <a href="{{ url_for('main.post',post_id=3) }}"#}
-                            {#                               title="{{ 3 | post_title }}" rel="next">#}
-                            {#                                <span class="post_navigation_title title">Next Post:</span>#}
-                            {#                            </a>#}
                             Next Post:
                             <h4 class="title post_title"><a
-                                    href="{{ url_for('main.post',post_id=3) }}">{{ 3 | post_title }}</a></h4>
+                                    href="{{ url_for('main.post',post_id=next_post.id) }}">{{ next_post.title }}</a></h4>
                             <p></p>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </section>
 

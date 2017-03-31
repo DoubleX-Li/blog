@@ -11,8 +11,9 @@ class EditProfileForm(Form):
 
 class PostForm(Form):
     title = StringField('标题', validators=[DataRequired()])
-    content = PageDownField("文章内容", render_kw={'rows': '30'}, validators=[DataRequired()])
+    content = TextAreaField("文章内容", validators=[DataRequired()])
     new_tag = StringField('标签', validators=[DataRequired()])
+    img = StringField('图片',validators=[DataRequired()])
     submit = SubmitField('提交')
 
 

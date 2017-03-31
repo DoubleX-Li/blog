@@ -2290,7 +2290,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     color: #666;
     height: 36px;
     line-height: 36px;
-    width: 250px;
+    /*width: 250px;*/
 }
 
 input, textarea, textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus {
