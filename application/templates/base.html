@@ -108,39 +108,47 @@
                                 <ul id="menu-main" class="nav navbar-nav">
                                     <li id="menu-item-41"
                                         class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-41 dropdown default_menu active">
-                                        <a href="{{ url_for('main.index') }}" >Li's blog</a>
+                                        <a href="{{ url_for('main.index') }}">Li's blog</a>
                                     </li>
-                                    <li id="menu-item-115"
-                                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-115 dropdown default_menu">
-                                        <a href="#" data-hover="dropdown" class="dropdown-toggle">Posts</a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li id="menu-item-116"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-116 default_menu">
-                                                <a href="http://ahmad.works/writing/amazing-classic-interior-design-with-perfect-lighting/">Image
-                                                    Post</a></li>
-                                            <li id="menu-item-117"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-117 default_menu">
-                                                <a href="http://ahmad.works/writing/two-smart-kids-reading-magazine-before-sleeping/">Gallery
-                                                    Post</a></li>
-                                            <li id="menu-item-118"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-118 default_menu">
-                                                <a href="http://ahmad.works/writing/we-help-you-create-clean-modern-interior-design/">Video
-                                                    Post</a></li>
-                                            <li id="menu-item-119"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-119 default_menu">
-                                                <a href="http://ahmad.works/writing/good-father-walking-on-the-beach-with-son/">Audio
-                                                    Post</a></li>
-                                            <li id="menu-item-120"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-120 default_menu">
-                                                <a href="http://ahmad.works/writing/english-breakfast-tea-with-tasty-donut-desserts/">Post
-                                                    With Sidebar</a></li>
-                                            <li id="menu-item-175"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-175 default_menu">
-                                                <a href="http://ahmad.works/writing/no-thing-found">404 Error
-                                                    Page</a>
-                                            </li>
-                                        </ul>
+                                    <li id="menu-item-42"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-42 default_menu">
+                                        <a href="{{ url_for('main.archives') }}">Archives</a>
                                     </li>
+                                    <li id="menu-item-43"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43 default_menu">
+                                        <a href="{{ url_for('main.about') }}">About</a>
+                                    </li>
+                                    {% if current_user.is_authenticated %}
+                                        <li id="menu-item-115"
+                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-115 dropdown default_menu">
+                                            <a href="#" data-hover="dropdown" class="dropdown-toggle">Account</a>
+                                            <ul role="menu" class=" dropdown-menu">
+                                                <li id="menu-item-116"
+                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-116 default_menu">
+                                                    <a href="{{ url_for('auth.change_password') }}">Change Password</a>
+                                                </li>
+                                                <li id="menu-item-117"
+                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-117 default_menu">
+                                                    <a href="{{ url_for('auth.change_email_request') }}">Change
+                                                        email</a>
+                                                </li>
+                                                <li id="menu-item-118"
+                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-118 default_menu">
+                                                    <a href="{{ url_for('auth.logout') }}">Log out</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li id="menu-item-44"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44 default_menu">
+                                            <a href="{{ url_for('main.add_post') }}">New Post</a>
+                                        </li>
+                                    {% else %}
+                                        <li id="menu-item-44"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44 default_menu">
+                                            <a href="{{ url_for('auth.login') }}">Log in</a>
+                                        </li>
+                                    {% endif %}
+
                                 </ul>
                             </div>
                         </div>

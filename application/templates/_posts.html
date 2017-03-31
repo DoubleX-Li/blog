@@ -10,8 +10,8 @@
                             href="{{ url_for('main.post',post_id=post.id, _external=True) }}"
                             title="{{ post.title }}"><img
                             width="940" height="400"
-                            src="https://i.ytimg.com/vi/OvhoYbjtiKc/maxresdefault.jpg"
-                            class="img-responsive wp-post-image" alt="Resturant-Employer"/></a>
+                            src="{{ post.img }}"
+                            class="img-responsive wp-post-image" alt="post image"/></a>
                     </div>
                 </div>
                 <div class="post_info_wrapper">

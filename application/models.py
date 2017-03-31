@@ -120,6 +120,7 @@ class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
+    img = db.Column(db.String(255))
     content = db.Column(db.Text)
     content_html = db.Column(db.Text)
     post_time = db.Column(db.DateTime)

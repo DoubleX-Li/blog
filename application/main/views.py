@@ -109,6 +109,9 @@ def post(post_id):
         comment_time = datetime.utcnow()
         comment = Comment(author_name=name,email=email, content=content, comment_time=comment_time, post_id=post_id)
         db.session.add(comment)
+        post = Post.query.get(post_id)
+        post.last_comment_time = datetime.utcnow()
+        db.session.add(post)
         db.session.commit()
         flash('成功添加评论')
 

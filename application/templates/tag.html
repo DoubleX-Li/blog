@@ -7,22 +7,34 @@
 {% block mySubheading %}{% endblock %}
 
 {% block page_content %}
-<h3>{{ tag.tag_name }}下的文章有{{ post_num }}篇</h3><hr>
+    <main class="main_content col-md-12">
 
-{% for post in posts %}
-    <a href="{{ url_for('main.post',post_id=post.id) }}"><strong>{{post.title}}</strong></a><br>
-{% endfor %}
 
-<ul class="pager">
-    {% if posts.has_prev %}
-    <li class="previous"><a href="{{ url_for('index', page = posts.prev_num) }}"><< 上一页</a></li>
-    {% else %}
-    <li class="previous disabled"><a href="#">上一页</a></li>
-    {% endif %}
-    {% if posts.has_next %}
-    <li class="next"><a href="{{ url_for('index', page = posts.next_num) }}">下一页 >></a></li>
-    {% else %}
-    <li class="next disabled"><a href="#">下一页</a></li>
-    {% endif %}
-</ul>
+        <div class="blog_posts_wrapper blog_posts_list clearfix  banners_blog_style">
+            <h3>{{ tag.tag_name }}下的文章有{{ post_num }}篇</h3>
+            <hr>
+
+            {% for post in posts %}
+                <a href="{{ url_for('main.post',post_id=post.id) }}"><strong>{{ post.title }}</strong></a><br>
+            {% endfor %}
+
+            <!-- Reading progress bar -->
+        </div> <!-- .blog_posts_wrapper -->
+
+
+    </main><!-- .main_content -->
+
+
+    {#<ul class="pager">#}
+    {#    {% if posts.has_prev %}#}
+    {#    <li class="previous"><a href="{{ url_for('index', page = posts.prev_num) }}"><< 上一页</a></li>#}
+    {#    {% else %}#}
+    {#    <li class="previous disabled"><a href="#">上一页</a></li>#}
+    {#    {% endif %}#}
+    {#    {% if posts.has_next %}#}
+    {#    <li class="next"><a href="{{ url_for('index', page = posts.next_num) }}">下一页 >></a></li>#}
+    {#    {% else %}#}
+    {#    <li class="next disabled"><a href="#">下一页</a></li>#}
+    {#    {% endif %}#}
+    {#</ul>#}
 {% endblock %}

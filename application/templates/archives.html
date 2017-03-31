@@ -6,20 +6,41 @@
 {% block myHead %}文章归档{% endblock %}
 
 {% block page_content %}
-    {% for year in category %}
-        <h4>{{ year }}年</h4>
-        {% for month in category[year] %}
-            <h4>{{ month }}月</h4>
-            {% for post in category[year][month] %}
-                <a href="{{ url_for('.post',post_id=post.id) }}"><strong>{{ post.title }}</strong></a><br>
+
+
+    <div id="categories-4" class="widget_container widget_content widget widget_categories clearfix">
+        <h4 class="widget_title title"><span class="page_header_title">Categories</span></h4>
+        {% for year in category %}
+            <h4>{{ year }}年</h4>
+            {% for month in category[year] %}
+                <h4>{{ month }}月</h4>
+                <ul>
+                    {% for post in category[year][month] %}
+                        <li class="cat-item cat-item-{{ loop.index }}">
+                            <a href="{{ url_for('.post',post_id=post.id) }}">{{ post.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% endfor %}
         {% endfor %}
-    {% endfor %}
+
+    </div>
+
     <hr>
-    <h3>
-    标签云
-    </h3>
-    {% for tag in tags %}
-        <a href="{{ url_for('main.tag', tag_id=tag.id) }}">{{ tag.tag_name }}</a>
-    {% endfor %}
+    {#    <h3>#}
+    {#    标签云#}
+    {#    </h3>#}
+    {#    {% for tag in tags %}#}
+    {#        <a href="{{ url_for('main.tag', tag_id=tag.id) }}">{{ tag.tag_name }}</a>#}
+    {#    {% endfor %}#}
+    <div id="tag_cloud-3" class="widget_container widget_content widget widget_tag_cloud clearfix">
+        <h4 class="widget_title title"><span class="page_header_title">Tags</span></h4>
+
+        <div class="tagcloud">
+            {% for tag in tags %}
+                <a href='{{ url_for('main.tag',tag_id=tag.id) }}' class='tag-link-{{ loop.index }}'
+                   style='font-size: 18.266666666667pt;'>{{ tag.tag_name }}</a>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
