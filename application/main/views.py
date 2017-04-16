@@ -90,7 +90,6 @@ def alt_post(post_id):
             if i < len(post.tags) - 1:
                 new_tag_str += ','
         form.new_tag.data = new_tag_str
-        print(new_tag_str)
     return render_template('add_post.html',
                            title=post.title,
                            form=form)
@@ -103,9 +102,7 @@ def post(post_id):
         form = CommentForm()
         post = Post.query.get(post_id)
         prev_post = Post.query.order_by(Post.id.desc()).filter(Post.id < post_id).first() or None
-        print(prev_post)
         next_post = Post.query.order_by(Post.id.asc()).filter(Post.id > post_id).first() or None
-        print(next_post)
     else:
         flash('没有找到文章')
         return redirect('main.index')
