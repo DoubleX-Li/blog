@@ -1,6 +1,6 @@
 from flask.ext.pagedown.fields import PageDownField
 from flask.ext.wtf import Form
-from wtforms import StringField, SubmitField, TextAreaField
+from wtforms import StringField, SubmitField, TextAreaField, DateTimeField
 from wtforms.validators import DataRequired
 
 
@@ -11,6 +11,7 @@ class EditProfileForm(Form):
 
 class PostForm(Form):
     title = StringField('标题', validators=[DataRequired()])
+    post_time = DateTimeField('创建时间', validators=[DataRequired()])
     content = TextAreaField("文章内容", validators=[DataRequired()])
     new_tag = StringField('标签', validators=[DataRequired()])
     img = StringField('图片',validators=[DataRequired()])

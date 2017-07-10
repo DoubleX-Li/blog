@@ -65,6 +65,7 @@ def alt_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         tag_names = form.new_tag.data
+        post.post_time=form.post_time.data
         post.img = form.img.data
         post.content = form.content.data
         for tag_name in tag_names.split(','):
@@ -82,6 +83,7 @@ def alt_post(post_id):
     else:
         # GET请求时，处理form的tittle和content数据，以免传递post
         form.title.data = post.title
+        form.post_time.data = post.post_time
         form.img.data = post.img
         form.content.data = post.content
         new_tag_str = ''
